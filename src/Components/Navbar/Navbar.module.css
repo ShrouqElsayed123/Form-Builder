@@ -1,0 +1,7 @@
+.mainNavbar {
+background-color: var(--gray0-color) !important;
+}
+.mainNavbar :global(.navbar .navbar-collapse a){
+text-decoration: none;
+
+}

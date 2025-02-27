@@ -1,0 +1,48 @@
+.UserDasboard2 {
+    margin: 50px 0;
+}
+.UserDasboard2 :global(.num-of-response){ 
+    color: var(--gray3-color);
+}
+.UserDasboard2 :global(.date){
+    color: var(--gray4-color);
+}
+.UserDasboard2 :global(tbody){
+    vertical-align: baseline;
+}
+
+
+.UserDasboard2 :global(thead tr th div button ){
+font-weight: bold;
+
+
+}
+
+.UserDasboard2 :global(.form-moredetails-col .Publish-state){
+   
+    color: white;
+    padding: 6px 11px;
+    border-radius: 100px;
+    font-weight: 600;
+    width: 126px;
+    text-align: center;
+}
+
+.UserDasboard2 :global(.form-moredetails-col .response-link a){
+
+color: black;
+}
+
+
+.UserDasboard2 :global(.form-moredetails-col .more ul li i){
+    color: white;
+
+}
+.UserDasboard2 :global(.form-moredetails-col .more ul li a){
+    color: white;
+    text-decoration: none;
+}
+
+.UserDasboard2 :global(.create-form img){
+    width: 150px;
+}

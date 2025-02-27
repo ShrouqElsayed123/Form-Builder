@@ -1,0 +1,25 @@
+.mainFooter{
+    background-color: #4E4E4E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 40px;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+}
+
+.mainFooter :global(.footer-icons ){
+    padding-bottom: 24px;
+
+}
+.mainFooter :global(img){
+    width: 30px;
+    height: fit-content;
+
+}
+.mainFooter :global(.footer-txt p){
+    font-size: 13px;
+}

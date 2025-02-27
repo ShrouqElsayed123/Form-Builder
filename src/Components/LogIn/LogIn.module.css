@@ -1,0 +1,65 @@
+.login{
+    padding: 50px 0;
+  
+    width: 100%;
+    text-align: center;
+    /* height: 2000px; */
+}
+
+
+.login :global(h5){
+    font-size: 32px;
+    font-weight: 700;
+}
+.login :global(.card-text){
+    font-size: 20px;
+    font-weight: 500;
+}
+.login :global(.form-content form div){
+padding-bottom: 24px;
+}
+.login :global(label){
+    font-size: 16px;
+    font-weight: 600;
+padding-bottom: 8px;
+
+}
+.login :global(.form-content form div input){
+border:1px solid #D9D9D9;
+border-radius: 5px;
+height: 32px;
+outline: 0;
+padding: 10px;
+}
+.login :global(.form-content form div input:focus){
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: var(--main-color);
+    outline: 0;
+    box-shadow: 0 0 0 .25rem hsla(94, 100%, 35%, 0.25);
+}
+
+
+.login :global(.form-content form .form-text a){
+text-decoration: none;
+color: #4A4A4A;
+}
+.login :global(.form-content form .Form-button button){
+    color: white;
+    background-color: var(--main-color);
+    padding: 10px 15px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: 0.5s;
+}
+
+
+.login :global(.form-content form .Form-button button:hover){
+  
+    background-color:var(--darkprimary1-color) ;
+}
+
+.login :global(.container .card){
+padding: 24px;
+}

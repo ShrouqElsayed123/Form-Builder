@@ -1,0 +1,29 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow: auto;
+}
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root{
+  --main-color:#4EB100;
+  --gray0-color:#F5F5F5;
+  --gray3-color:#AEAEAE;
+  --gray4-color:#989898;
+  --secondary-color:#D9B343;
+  --darkprimary1-color:#3E8E00;
+}
+.mainbtn{
+color: white;
+background-color: var(--main-color);
+padding: 10px 15px;
+border-radius: 3px;
+font-size: 18px;
+font-weight: 700;
+transition: 0.5s;
+}
+.mainbtn:hover{
+  background-color:var(--darkprimary1-color) ;
+}
