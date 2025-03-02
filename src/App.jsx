@@ -10,6 +10,9 @@ import UserDasboard1 from './Pages/UserDasboard1/UserDasboard1'
 import UserDasboard2 from './Pages/UserDasboard2/UserDasboard2'
 import Loading from './Components/Loading/Loading'
 import SideBar from './Components/SideBar/SideBar'
+import ForgetPassword from './Components/ForgetPassword/ForgetPassword'
+import FormResponse from './Components/FormResponse/FormResponse'
+import Search from './Components/Search/Search'
 
 function App() {
  
@@ -21,6 +24,10 @@ const router=createBrowserRouter([
     {path:'userdashboard2',element:<UserDasboard2 />},
     {path:'loading',element:<Loading />},
     {path:'sidebar',element:<SideBar />},
+    {path:'forgetpassword',element:<ForgetPassword />},
+    {path:'formresponse',element:<FormResponse/>},
+    {path:'search',element:<Search/>},
+    
   ]}
 ])
   return (

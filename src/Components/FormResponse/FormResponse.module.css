@@ -1,0 +1,30 @@
+.formResponse :global(.download-btn button){
+    color: white;
+    background-color: var(--main-color);
+    padding: 10px 15px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: 0.5s
+}
+
+
+.formResponse :global(.download-btn button:hover){
+  
+    background-color:var(--darkprimary1-color) ;
+}
+.formResponse :global(.searchInput .form-control){
+    -o-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    border-radius: 50px;
+    width:500px;
+}
+.formResponse :global(.searchInput :focus){
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: var(--main-color);
+    outline: 0;
+    box-shadow: 0 0 0 .25rem hsla(94, 100%, 35%, 0.25);
+}
