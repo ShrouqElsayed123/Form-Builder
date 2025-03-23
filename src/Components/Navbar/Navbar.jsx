@@ -1,6 +1,7 @@
 import styles from './Navbar.module.css'
 import logo  from '../../assets/imgs/Logo.png'
 import { NavLink } from 'react-router-dom'
+import { Avatar } from '@mui/material'
 export default function Navbar() {
   return (
    <>
@@ -24,7 +25,8 @@ export default function Navbar() {
     </button>
     <div className="collapse navbar-collapse flex-grow-0" id="navbarNav">
       <ul className="navbar-nav">
-       <NavLink to="/login" className=' mainbtn'>Log In</NavLink>
+       <li><NavLink to="/login" className=' mainbtn'>Log In</NavLink></li>
+       <li><Avatar src="/broken-image.jpg" /></li>
       </ul>
     </div>
   </div>

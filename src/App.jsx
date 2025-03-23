@@ -12,7 +12,9 @@ import Loading from './Components/Loading/Loading'
 import SideBar from './Components/SideBar/SideBar'
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword'
 import FormResponse from './Components/FormResponse/FormResponse'
-import Search from './Components/Search/Search'
+import { Toaster } from 'react-hot-toast'
+
+// import Search from './Components/Search/Search'
 
 function App() {
  
@@ -25,14 +27,15 @@ const router=createBrowserRouter([
     {path:'loading',element:<Loading />},
     {path:'sidebar',element:<SideBar />},
     {path:'forgetpassword',element:<ForgetPassword />},
-    {path:'formresponse',element:<FormResponse/>},
-    {path:'search',element:<Search/>},
+    {path:'formresponse',element:<FormResponse formname="vhjvj"/>},
+    // {path:'search',element:<Search/>},
     
   ]}
 ])
   return (
     <>
   <RouterProvider router={router}/>
+  <Toaster />
     </>
   )
 }

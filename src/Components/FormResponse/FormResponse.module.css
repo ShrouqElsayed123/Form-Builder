@@ -1,4 +1,4 @@
-.formResponse :global(.download-btn button){
+/* .formResponse :global(.download-btn button){
     color: white;
     background-color: var(--main-color);
     padding: 10px 15px;
@@ -27,4 +27,4 @@
     border-color: var(--main-color);
     outline: 0;
     box-shadow: 0 0 0 .25rem hsla(94, 100%, 35%, 0.25);
-}
+} */
