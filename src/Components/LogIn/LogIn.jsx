@@ -40,7 +40,7 @@ async function sendDataToLogin (values) {
     localStorage.setItem("token",data.token)
     toast.success("You Login Successfully");
     
-    setTimeout(()=>{navigate("/userdashboard")},20)
+    setTimeout(()=>{navigate("/")},20)
    }
    console.log(data);
   }
@@ -113,7 +113,7 @@ const formik =useFormik({
   onBlur={formik.handleBlur}/>
   {formik.errors.password && formik.touched.password && (<p className="text-danger">{formik.errors.password}</p>)}
 </div>
-{/* ///////////////////////RePassword////// */}
+
 <p className='text-danger'>{dataError}</p>
 
 
