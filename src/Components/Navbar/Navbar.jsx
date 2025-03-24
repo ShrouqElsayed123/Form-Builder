@@ -30,7 +30,7 @@ export default function Navbar() {
     <div className="collapse navbar-collapse flex-grow-0" id="navbarNav">
       <ul className="navbar-nav">
         {!token && <><li><NavLink to="/login" className=' mainbtn'>Log In</NavLink></li></>}
-       {token && <><li   ><NavLink ><Avatar1 /></NavLink></li></>}
+       {token && <><li   ><Avatar1 /></li></>}
        
       </ul>
     </div>

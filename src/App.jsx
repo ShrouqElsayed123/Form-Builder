@@ -39,6 +39,7 @@ function App() {
     path:"/",
     element:<GuestRoute><Layout /></GuestRoute>,
     children:[
+      {index:true,element:<Home1 />},
      
       {path:'login',element:<LogIn />},
     ]
