@@ -13,6 +13,7 @@ import SideBar from './Components/SideBar/SideBar'
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword'
 import FormResponse from './Components/FormResponse/FormResponse'
 import { Toaster } from 'react-hot-toast'
+import UserProvider from './Components/Context/User.context'
 
 // import Search from './Components/Search/Search'
 
@@ -34,8 +35,12 @@ const router=createBrowserRouter([
 ])
   return (
     <>
-  <RouterProvider router={router}/>
-  <Toaster />
+    <UserProvider>
+    <RouterProvider router={router}/>
+    <Toaster />
+    </UserProvider>
+
+ 
     </>
   )
 }

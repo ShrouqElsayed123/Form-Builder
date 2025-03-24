@@ -4,13 +4,15 @@ import {  useFormik } from 'formik'
 // import '../Signup/Signup.css'
 import axios from 'axios'
 import { object, string } from 'yup'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { userContext } from '../Context/User.context'
 // import { useContext, useState } from 'react'
 // import { tokenContext } from '../../components/context/User.context'
 
 export default function LogIn() {
+  let {setToken}=useContext(userContext)
 
 
   // let {setToken}=useContext(tokenContext)
@@ -34,10 +36,11 @@ async function sendDataToLogin (values) {
     }
    let {data}= await axios.request(options)
    if(data.message=="success"){
-   
+   setToken(data.token)
     localStorage.setItem("token",data.token)
     toast.success("You Login Successfully");
-    setTimeout(()=>{navigate("/")},2000)
+    
+    setTimeout(()=>{navigate("/userdashboard")},20)
    }
    console.log(data);
   }
