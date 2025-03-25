@@ -16,6 +16,7 @@ import { Toaster } from 'react-hot-toast'
 import UserProvider from './Components/Context/User.context'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import GuestRoute from './Components/GuestRoute/GuestRoute'
+import FormPage from './Pages/DashboardPages/FormPage'
 
 // import Search from './Components/Search/Search'
 
@@ -30,7 +31,8 @@ function App() {
           {path:'loading',element:<Loading />},
           {path:'sidebar',element:<SideBar />},
           {path:'forgetpassword',element:<ForgetPassword />},
-          {path:'formresponse',element:<FormResponse formname="vhjvj"/>},
+          {path:'formpage',element:<FormPage />},
+          {path:'formresponse',element:<FormResponse formname="formname"/>},
           // {path:'search',element:<Search/>},
           
         ]

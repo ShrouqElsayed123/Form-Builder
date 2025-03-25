@@ -7,7 +7,7 @@ export default function Layout() {
   return (
     <>
    <div className={styles.layout}>
-   <Navbar />
+   <Navbar  />
     <Outlet></Outlet>
     {/* <Footer /> */}
    </div>

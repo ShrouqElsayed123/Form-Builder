@@ -1,15 +1,16 @@
-import styles from './Navbar.module.css'
 import logo  from '../../assets/imgs/Logo.png'
 import { NavLink } from 'react-router-dom'
 // import { Avatar } from '@mui/material'
 import { useContext } from 'react'
 import { userContext } from '../Context/User.context'
 import Avatar1 from '../Avatar/Avatar1'
+import styles from './Navbar.module.css'
+
 export default function Navbar() {
-  let{token}=useContext(userContext)
+  let{token,role}=useContext(userContext)
   return (
    <>
-   <div className={styles.mainNavbar}>
+   <div className={`${styles.mainNavbar} ${role=="admin" && 'd-none'}`} >
    <nav className="navbar navbar-expand-lg ">
   <div className="container d-flex justify-content-between">
     <NavLink className="navbar-brand d-flex align-items-center gap-2" to="/">

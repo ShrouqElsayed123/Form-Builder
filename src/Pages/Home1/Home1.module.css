@@ -12,7 +12,15 @@
 .home1 :global(h6){
     color: var(--secondary-color);
 }
-
+.home1 :global(.homeimg),
+.UserDasboard1 :global(.homeimg){
+    animation: bounce 4s linear infinite;
+}
+@keyframes bounce{
+    0%{transform: translateY(-5px);}
+    50%{transform: translateY(5px);}
+    100%{transform: translateY(-5px);}
+}
 .UserDasboard1 :global(.container){
  
     display: flex;

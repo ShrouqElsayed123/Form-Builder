@@ -58,7 +58,7 @@ export default function Response({formname}) {
   /////////////start get data from api//////////////
   
   async function getProducts() {
-    const { data } = await axios.get("https://jsonplaceholder.typicode.com/posts");
+    const { data } = await axios.get("https://fakestoreapi.com/users");
 
     if (data.length > 0) {
       const dynamicColumns = Object.keys(data[0]).map((key) => ({
