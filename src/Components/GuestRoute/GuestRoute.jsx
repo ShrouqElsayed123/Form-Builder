@@ -8,6 +8,6 @@ export default function GuestRoute({children}) {
     return children 
    }
    else{
-    return <Navigate to="/" />
+    return <Navigate to="/"  />
    }
 }

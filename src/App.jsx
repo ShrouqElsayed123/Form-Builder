@@ -17,21 +17,32 @@ import UserProvider from './Components/Context/User.context'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import GuestRoute from './Components/GuestRoute/GuestRoute'
 import FormPage from './Pages/DashboardPages/FormPage'
+import AdminRoute from './Components/AdminRoute/AdminRoute'
+import DashboardCharts from './Components/DashboardComponent/DashboardCharts/DashboardCharts'
+// import DashboardLayout from './Components/DashboardComponent/DashboardLayout/DashboardLayout'
+// import AdminRoute from './Components/AdminRoute/AdminRoute'
 
 // import Search from './Components/Search/Search'
 
 function App() {
+
  const router =createBrowserRouter([
-  {path:"/",element:<ProtectedRoute ><Layout /></ProtectedRoute>,
+  {path:"/",element:<Layout />,
     children:[
           {index:true,element:<Home1 />},
          
           
-          {path:'userdashboard2',element:<UserDasboard2 />},
+          {path:'userdashboard2',element:<ProtectedRoute><UserDasboard2 /></ProtectedRoute>},
           {path:'loading',element:<Loading />},
           {path:'sidebar',element:<SideBar />},
           {path:'forgetpassword',element:<ForgetPassword />},
-          {path:'formpage',element:<FormPage />},
+
+          {path:'formpage',element:<AdminRoute><FormPage /></AdminRoute>,
+            children:[
+              {index:true,element:<DashboardCharts />}
+            ]
+          },
+
           {path:'formresponse',element:<FormResponse formname="formname"/>},
           // {path:'search',element:<Search/>},
           
@@ -45,8 +56,60 @@ function App() {
      
       {path:'login',element:<LogIn />},
     ]
-  }
- ])
+  },
+  // {
+  //   path:"/",
+  //   element:<AdminRoute><DashboardLayout /></AdminRoute>,
+  //   children:[
+  //     {index:true,element:<Loading />},
+  //     {path:'formpage',element:<FormPage />},
+     
+  //   ]
+  // }
+])
+  
+  // مثال على بيانات المستخدم (يجب جلبها من السياق أو Redux)
+  
+    // {
+    //   path: "/",
+    //   element: <Layout />,
+    // },
+  //   {
+  //     path: "/",
+  //     element: <GuestRoute><Layout /></GuestRoute>,
+  //     children: [{ index: true, element: <Home1 /> },
+  //       { path: "login", element: <LogIn /> }],
+  //   },
+ 
+  //   {
+  //     path: "/",
+  //     element: <ProtectedRoute><Layout /></ProtectedRoute>,
+  //     children: [
+  //         {index: true, element: <Home1 /> },
+  //         {path:'userdashboard2',element:<UserDasboard2 />},
+  //         {path:'loading',element:<Loading />},
+  //         {path:'sidebar',element:<SideBar />},
+  //         {path:'forgetpassword',element:<ForgetPassword />},
+  //         {path:'formpage',element:<FormPage />},
+  //         {path:'formresponse',element:<FormResponse formname="formname"/>}
+  //     ],
+  //   },
+  //   // {
+  //   //   path: "/",
+  //   //   element: <ProtectedRoute><Layout /></ProtectedRoute>,
+  //   //   children: [{ index: true, element: <Home1 /> }],
+  //   // },
+  //   // {
+  //   //   path: "*",
+  //   //   element: <NotFound />,
+  //   // },
+  // ]);
+  
+
+  
+
+
+
 // const router=createBrowserRouter([
 //   {path:"/",element:<Layout />,children:[
 //     {index:true,element:<Home1 />},
