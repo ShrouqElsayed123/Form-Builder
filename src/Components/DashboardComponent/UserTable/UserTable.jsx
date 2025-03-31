@@ -9,7 +9,7 @@ export default function FormTable() {
   const [records, setRecords] = useState([]);
   const [columns, setColumns] = useState([]);
 
-  async function getProducts() {
+  async function getUsers() {
     const { data } = await axios.get("http://127.0.0.1:8000/api/user/show");
 
     if (data.length > 0) {
@@ -46,8 +46,8 @@ export default function FormTable() {
   }
 
   useEffect(() => {
-    getProducts();
-  }, []);
+    getUsers();
+  }, [records]);
 
   const handleDelete= async (id) => {
     try {

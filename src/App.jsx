@@ -42,6 +42,7 @@ function App() {
           {path:'formpage',element:<AdminRoute><FormPage /></AdminRoute>,
             children:[
               {index:true,element:<DashboardCharts />},
+              {path:'chart',element:<DashboardCharts />},
               {path:'formtable',element:<FormTable />},
               {path:'usertable',element:<UserTable />},
             ]
