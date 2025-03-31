@@ -2,7 +2,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Box, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Edit } from "@mui/icons-material";
 
@@ -11,7 +10,7 @@ export default function FormTable() {
   const [columns, setColumns] = useState([]);
 
   async function getProducts() {
-    const { data } = await axios.get("https://fakestoreapi.com/users");
+    const { data } = await axios.get("http://127.0.0.1:8000/api/user/show");
 
     if (data.length > 0) {
       const dynamicColumns = Object.keys(data[0]).map((key) => ({
@@ -50,8 +49,17 @@ export default function FormTable() {
     getProducts();
   }, []);
 
-  const handleDelete = (id) => {
-    setRecords((prevRecords) => prevRecords.filter((record) => record.id !== id));
+  const handleDelete= async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/user/delete/${id}`);
+      
+      // Update the state to remove the deleted record
+      setRecords((prevRecords) => prevRecords.filter((record) => record.id !== id));
+      
+      console.log(`Deleted record with ID: ${id}`);
+    } catch (error) {
+      console.error("Error deleting record:", error);
+    }
   };
 
   const [paginationModel, setPaginationModel] = useState({
