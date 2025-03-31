@@ -8,6 +8,7 @@ import { Edit } from "@mui/icons-material";
 export default function FormTable() {
   const [records, setRecords] = useState([]);
   const [columns, setColumns] = useState([]);
+  const [runUseEffect, setRun] = useState(0);
 
   async function getUsers() {
     const { data } = await axios.get("http://127.0.0.1:8000/api/user/show");
@@ -47,16 +48,20 @@ export default function FormTable() {
 
   useEffect(() => {
     getUsers();
-  }, [records]);
+  }, [runUseEffect]);
 
   const handleDelete= async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/user/delete/${id}`);
-      
+       let res=await axios.delete(`http://127.0.0.1:8000/api/user/delete/${id}`);
+      console.log(res.status);
+      if(res.status){
+      setRun((prev)=>prev+1)
       // Update the state to remove the deleted record
       setRecords((prevRecords) => prevRecords.filter((record) => record.id !== id));
       
       console.log(`Deleted record with ID: ${id}`);
+      }
+     
     } catch (error) {
       console.error("Error deleting record:", error);
     }
