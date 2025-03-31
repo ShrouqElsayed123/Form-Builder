@@ -19,6 +19,8 @@ import GuestRoute from './Components/GuestRoute/GuestRoute'
 import FormPage from './Pages/DashboardPages/FormPage'
 import AdminRoute from './Components/AdminRoute/AdminRoute'
 import DashboardCharts from './Components/DashboardComponent/DashboardCharts/DashboardCharts'
+import FormTable from './Components/DashboardComponent/FormTable/FormTable'
+import UserTable from './Components/DashboardComponent/UserTable/UserTable'
 // import DashboardLayout from './Components/DashboardComponent/DashboardLayout/DashboardLayout'
 // import AdminRoute from './Components/AdminRoute/AdminRoute'
 
@@ -39,7 +41,9 @@ function App() {
 
           {path:'formpage',element:<AdminRoute><FormPage /></AdminRoute>,
             children:[
-              {index:true,element:<DashboardCharts />}
+              {index:true,element:<DashboardCharts />},
+              {path:'formtable',element:<FormTable />},
+              {path:'usertable',element:<UserTable />},
             ]
           },
 
