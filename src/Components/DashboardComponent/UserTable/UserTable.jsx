@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Edit } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
 
 export default function FormTable() {
   const [records, setRecords] = useState([]);
@@ -31,9 +32,11 @@ export default function FormTable() {
         headerAlign: "center",
         renderCell: (params) => (
           <>
-            <IconButton color="primary" onClick={() => console.log("Add action", params.row)}>
+           <NavLink to={`${params.row.id}`}>
+           <IconButton color="primary" onClick={() => console.log("Add action", params.row.id)}>
               <Edit />
             </IconButton>
+           </NavLink>
             <IconButton color="error" onClick={() => handleDelete(params.row.id)}>
               <DeleteIcon />
             </IconButton>
@@ -73,7 +76,9 @@ export default function FormTable() {
   });
 
   return (
+    
     <div style={{ margin: "24px" }}>
+      
       <Box>
         <Box sx={{ height: 600, mx: "auto" }}>
           <DataGrid
