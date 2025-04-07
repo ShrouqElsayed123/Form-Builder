@@ -1,0 +1,16 @@
+.signup .container form input{
+    border: 1px solid gray;
+    height: 40px;
+    
+}
+.signup .container form .Form-button .btn{
+    background-color: var(--main-color);
+    color: white;
+}
+.signup .container form div{
+margin-bottom: 20px;
+
+}
+.signup .container form input:focus {
+    border-color: aqua;
+}

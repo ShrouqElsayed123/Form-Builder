@@ -5,13 +5,13 @@ import { NavLink } from 'react-router-dom';
 
 function handleClick(event) {
   event.preventDefault();
-  console.info('You clicked a breadcrumb.');
+//   console.info('You clicked a breadcrumb.');
 }
 
 export default function EditBreadcrumbs() {
   return (
    <>
-  <div role="presentation" onClick={handleClick}>
+  <div role="presentation" onClick={handleClick} className='mb-3'>
       <Breadcrumbs aria-label="breadcrumb" separator={<KeyboardDoubleArrowRight/>}>
       <NavLink
                
