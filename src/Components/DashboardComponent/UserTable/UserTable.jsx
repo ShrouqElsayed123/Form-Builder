@@ -1,10 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, IconButton } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Edit } from "@mui/icons-material";
+import { Add, Edit } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
+import toast from 'react-hot-toast'
 
 export default function FormTable() {
   const [records, setRecords] = useState([]);
@@ -54,19 +55,25 @@ export default function FormTable() {
   }, [runUseEffect]);
 
   const handleDelete= async (id) => {
+     const loadingId= toast.loading("User Deleting Now .....")
     try {
        let res=await axios.delete(`http://127.0.0.1:8000/api/user/delete/${id}`);
       console.log(res.status);
       if(res.status){
+
       setRun((prev)=>prev+1)
       // Update the state to remove the deleted record
       setRecords((prevRecords) => prevRecords.filter((record) => record.id !== id));
-      
-      console.log(`Deleted record with ID: ${id}`);
+          toast.success("User Deleted Successfully");
+
       }
      
     } catch (error) {
       console.error("Error deleting record:", error);
+      toast.error(error.response.data.message);
+    }
+    finally{
+      toast.dismiss(loadingId)
     }
   };
 
@@ -80,6 +87,13 @@ export default function FormTable() {
     <div style={{ margin: "24px" }}>
       
       <Box>
+    <div  className="d-flex justify-content-end mb-3">
+   <NavLink to="adduser">
+   <Button variant="contained" style={{backgroundColor:"#4EB100"}} startIcon={<Add />}>
+  Add User
+</Button>
+   </NavLink>
+    </div>
         <Box sx={{ height: 600, mx: "auto" }}>
           <DataGrid
             disableColumnMenu

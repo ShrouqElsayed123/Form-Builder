@@ -22,6 +22,7 @@ import DashboardCharts from './Components/DashboardComponent/DashboardCharts/Das
 import FormTable from './Components/DashboardComponent/FormTable/FormTable'
 import UserTable from './Components/DashboardComponent/UserTable/UserTable'
 import EditUser from './Components/DashboardComponent/EditUser/EditUser'
+import AddUser from './Components/DashboardComponent/AddUser/AddUser'
 // import DashboardLayout from './Components/DashboardComponent/DashboardLayout/DashboardLayout'
 // import AdminRoute from './Components/AdminRoute/AdminRoute'
 
@@ -46,6 +47,7 @@ function App() {
               {path:'chart',element:<DashboardCharts />},
               {path:'formtable',element:<FormTable />},
               {path:'usertable',element:<UserTable />},
+              {path:'usertable/:id',element:<AddUser />},
               {path:'usertable/:id',element:<EditUser />}
             ]
           },
