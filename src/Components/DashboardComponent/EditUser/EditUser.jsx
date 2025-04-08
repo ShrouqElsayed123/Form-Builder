@@ -7,16 +7,17 @@ import axios from 'axios'
 import { object, ref, string } from 'yup'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { useNavigate, useParams } from 'react-router-dom'
+import {  useParams } from 'react-router-dom'
 export default function EditUser() {
   const [user, setUser] = useState({});
 
     let {id}=useParams()
 // console.log(id);
+// المسئولة عن احضار بيانات المسخدم 
 async function getUsers() {
   try {
     const { data } = await axios.get(`http://127.0.0.1:8000/api/user/showbyid/${id}`);
-    let newUser = data[0]; // لو فعلاً هو Array
+    let newUser = data[0]; 
     setUser(newUser);
   } catch (error) {
     console.error("Error fetching user", error);
@@ -24,7 +25,7 @@ async function getUsers() {
 }
   
   
-  const navigate=useNavigate()
+  // const navigate=useNavigate()
   const [accountExitMessage,setAccountExitMessage]=useState(null)
 
 
@@ -42,17 +43,14 @@ async function sendDataToSignup (values) {
  const loadingId= toast.loading("data sending .....")
   try{
     const options={
-      url:"https://ecommerce.routemisr.com/api/v1/auth/signup",
+      url:`http://127.0.0.1:8000/api/user/update/${id}`,
       method:"POST",
       data:values
     }
    let {data}= await axios.request(options)
-   if(data.message=="success"){
-    toast.dismiss(loadingId)
-    toast.success("User Created Successfully");
-    setTimeout(()=>{navigate("/login")},2000)
-   }
-   console.log(data);
+  console.log(data);
+  
+  
   }
   catch(error){
     toast.dismiss(loadingId)
@@ -67,7 +65,7 @@ const formik = useFormik({
     name: user.name || "",
     email: user.email || "",
     password: "",
-    rePassword: "",
+    password_confirmation: "",
   },
   validationSchema,
   onSubmit: sendDataToSignup,
@@ -91,7 +89,7 @@ const formik = useFormik({
     <div className='name'>
       <label>name:</label>
       <br />
-      <input type="text" className="w-100 border-1 border-light-subtle rounded-2 outline-0"
+      <input type="text" className="w-100 p-1 border-1 border-light-subtle rounded-2 outline-0"
       name='name'
       value={formik.values.name}
       onChange={formik.handleChange}
@@ -103,7 +101,7 @@ const formik = useFormik({
     <div className='email'>
       <label>E-mail</label>
       <br />
-      <input type="email" className="w-100 border-1 border-light-subtle rounded-2 outline-0"
+      <input type="email" className="w-100 p-1 border-1 border-light-subtle rounded-2 outline-0"
       name='email'
       value={formik.values.email}
       onChange={formik.handleChange}
@@ -116,7 +114,7 @@ const formik = useFormik({
     <div className='password'>
       <label>Password</label>
       <br />
-      <input type="password" className="w-100 border-1 border-light-subtle rounded-2 outline-0"
+      <input type="password" className="w-100 p-1 border-1 border-light-subtle rounded-2 outline-0"
       name='password'
       value={formik.values.password}
       onChange={formik.handleChange}
@@ -128,7 +126,7 @@ const formik = useFormik({
     <div className='re-password'>
       <label>Re-Password</label>
       <br />
-      <input type="password" className="w-100 border-1 border-light-subtle rounded-2 outline-0"
+      <input type="password" className="w-100 p-1 border-1 border-light-subtle rounded-2 outline-0"
       name='rePassword'
       value={formik.values.rePassword}
       onChange={formik.handleChange}
