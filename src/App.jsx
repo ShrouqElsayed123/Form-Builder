@@ -24,6 +24,7 @@ import UserTable from './Components/DashboardComponent/UserTable/UserTable'
 // import EditUser from './Components/DashboardComponent/EditUser/EditUser'
 import AddUser from './Components/DashboardComponent/AddUser/AddUser'
 import EditUser from './Components/DashboardComponent/EditUser/EditUser'
+import NotFound from './Components/NotFound/NotFound'
 // import DashboardLayout from './Components/DashboardComponent/DashboardLayout/DashboardLayout'
 // import AdminRoute from './Components/AdminRoute/AdminRoute'
 
@@ -82,7 +83,7 @@ function App() {
         // Optional: 404 fallback
         {
           path: "*",
-          element: <h2 className="text-center text-danger mt-5">404 - Page Not Found</h2>,
+          element:<NotFound />,
         },
       ],
     },
