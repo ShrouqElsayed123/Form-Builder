@@ -80,12 +80,13 @@ function App() {
           element: <ProtectedRoute><FormResponse formname="formname" /></ProtectedRoute>,
         },
 
-        // Optional: 404 fallback
-        {
-          path: "*",
-          element:<NotFound />,
-        },
+        
       ],
+    },
+    // Optional: 404 fallback
+    {
+      path: "*",
+      element:<NotFound />,
     },
   ]);
 

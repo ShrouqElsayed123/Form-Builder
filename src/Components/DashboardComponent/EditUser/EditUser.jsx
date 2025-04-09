@@ -7,9 +7,10 @@ import axios from 'axios'
 import { object, ref, string } from 'yup'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import {  useParams } from 'react-router-dom'
+import {  useNavigate, useParams } from 'react-router-dom'
 export default function EditUser() {
   const [user, setUser] = useState({});
+  const navigate=useNavigate()
 
     let {id}=useParams()
 // console.log(id);
@@ -19,7 +20,7 @@ async function getUsers() {
     const { data } = await axios.get(`http://127.0.0.1:8000/api/user/showbyid/${id}`);
     let newUser = data[0]; 
     setUser(newUser);
-    console.log(user);
+    // console.log(user);
     
   } catch (error) {
     console.error("Error fetching user", error);
@@ -37,20 +38,25 @@ const validationSchema=object({
   email:string().required().email(),
   password:string().required(),
 //   matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/),
-  rePassword:string().required().oneOf([ref("password")]),
+  password_confirmation:string().required().oneOf([ref("password")]),
   
 })
 
 async function sendDataToSignup (values) {
- const loadingId= toast.loading("data sending .....")
+ const loadingId= toast.loading("User Updating  .....")
   try{
     const options={
       url:`http://127.0.0.1:8000/api/user/update/${id}`,
       method:"POST",
       data:values
     }
-   let {data}= await axios.request(options)
-  console.log(data);
+   let {data}= await axios.request(options);
+   if(data.status=="Reqest Was Succesful"){
+    toast.success("User Updating Successfully");
+    
+    setTimeout(()=>{navigate(-1)},20)
+   }
+  console.log(data.status);
   
   
   }
@@ -59,6 +65,10 @@ async function sendDataToSignup (values) {
 setAccountExitMessage(error.response.data.message)
 
   }
+  finally  {
+    toast.dismiss(loadingId)
+  
+   }
  
 } 
 const formik = useFormik({
@@ -123,17 +133,17 @@ const formik = useFormik({
       onBlur={formik.handleBlur}/>
       {formik.errors.password && formik.touched.password && (<p className="text-danger">{formik.errors.password}</p>)}
     </div>
-    {/* ///////////////////////RePassword////// */}
+    {/* ///////////////////////password_confirmation////// */}
 
     <div className='re-password'>
       <label>Re-Password</label>
       <br />
       <input type="password" className="w-100 p-1 border-1 border-light-subtle rounded-2 outline-0"
-      name='rePassword'
-      value={formik.values.rePassword}
+      name='password_confirmation'
+      value={formik.values.password_confirmation}
       onChange={formik.handleChange}
       onBlur={formik.handleBlur}/>
-      {formik.errors.rePassword && formik.touched.rePassword && (<p className="text-danger">{formik.errors.rePassword}</p>)}
+      {formik.errors.password_confirmation && formik.touched.password_confirmation && (<p className="text-danger">{formik.errors.password_confirmation}</p>)}
     </div>
 
 
