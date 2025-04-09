@@ -1,9 +1,10 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, IconButton, Popover, MenuItem } from "@mui/material";
+import { Box, IconButton, Popover, MenuItem, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import axios from "axios";
-import { Delete, Edit, GridOn, Link, Publish, Visibility } from "@mui/icons-material";
+import { Add, Delete, Edit, GridOn, Link, Publish, Visibility } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
 
 export default function FormTable() {
   const [records, setRecords] = useState([]);
@@ -73,6 +74,13 @@ export default function FormTable() {
     <>
       <div style={{ margin: "24px" }}>
         <Box>
+        <div  className="d-flex justify-content-end mb-3">
+   <NavLink to="">
+   <Button variant="contained" style={{backgroundColor:"#4EB100"}} startIcon={<Add />}>
+  Create Form
+</Button>
+   </NavLink>
+    </div>
           <Box sx={{ height: 600, mx: "auto" }}>
             <DataGrid
               disableColumnMenu

@@ -21,128 +21,79 @@ import AdminRoute from './Components/AdminRoute/AdminRoute'
 import DashboardCharts from './Components/DashboardComponent/DashboardCharts/DashboardCharts'
 import FormTable from './Components/DashboardComponent/FormTable/FormTable'
 import UserTable from './Components/DashboardComponent/UserTable/UserTable'
-import EditUser from './Components/DashboardComponent/EditUser/EditUser'
+// import EditUser from './Components/DashboardComponent/EditUser/EditUser'
 import AddUser from './Components/DashboardComponent/AddUser/AddUser'
+import EditUser from './Components/DashboardComponent/EditUser/EditUser'
 // import DashboardLayout from './Components/DashboardComponent/DashboardLayout/DashboardLayout'
 // import AdminRoute from './Components/AdminRoute/AdminRoute'
 
 // import Search from './Components/Search/Search'
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        // Public Routes
+        { index: true, element: <Home1 /> },
+        { path: "login", element: <GuestRoute><LogIn /></GuestRoute> },
+        { path: "forgetpassword", element: <ForgetPassword /> },
+        { path: "loading", element: <Loading /> },
 
- const router =createBrowserRouter([
-  {path:"/",element:<Layout />,
-    children:[
-          {index:true,element:<Home1 />},
-         
-          
-          {path:'userdashboard2',element:<ProtectedRoute><UserDasboard2 /></ProtectedRoute>},
-          {path:'loading',element:<Loading />},
-          {path:'sidebar',element:<SideBar />},
-          {path:'forgetpassword',element:<ForgetPassword />},
+        // Protected Routes
+        {
+          path: "userdashboard2",
+          element: <ProtectedRoute><UserDasboard2 /></ProtectedRoute>,
+        },
+        {
+          path: "sidebar",
+          element: <ProtectedRoute><SideBar /></ProtectedRoute>,
+        },
 
-          {path:'formpage',element:<AdminRoute><FormPage /></AdminRoute>,
-            children:[
-              {index:true,element:<DashboardCharts />},
-              {path:'chart',element:<DashboardCharts />},
-              {path:'formtable',element:<FormTable />},
-              {path:'usertable',element:<UserTable />},
-              {path:'usertable/:id',element:<AddUser />},
-              {path:'usertable/:id',element:<EditUser />}
-            ]
-          },
+        // Admin-Only Routes
+        {
+          path: "formpage",
+          element: <AdminRoute><FormPage /></AdminRoute>,
+          children: [
+            { index: true, element: <DashboardCharts /> },
+            { path: "chart", element: <DashboardCharts /> },
+            { path: "formtable", element: <FormTable /> },
+            
+            // User Management
+            {
+              path: "usertable",
+              children: [
+                { index: true, element: <UserTable /> }, // /formpage/usertable
+                { path: "adduser", element: <AddUser /> },   // /formpage/usertable/add
+                { path: ":id", element: <EditUser /> },  // /formpage/usertable/:id
+              ],
+            },
+          ],
+        },
+        
 
-          {path:'formresponse',element:<FormResponse formname="formname"/>},
-          // {path:'search',element:<Search/>},
-          
-        ]
-  },
-  {
-    path:"/",
-    element:<GuestRoute><Layout /></GuestRoute>,
-    children:[
-      {index:true,element:<Home1 />},
-     
-      {path:'login',element:<LogIn />},
-    ]
-  },
-  // {
-  //   path:"/",
-  //   element:<AdminRoute><DashboardLayout /></AdminRoute>,
-  //   children:[
-  //     {index:true,element:<Loading />},
-  //     {path:'formpage',element:<FormPage />},
-     
-  //   ]
-  // }
-])
-  
-  // مثال على بيانات المستخدم (يجب جلبها من السياق أو Redux)
-  
-    // {
-    //   path: "/",
-    //   element: <Layout />,
-    // },
-  //   {
-  //     path: "/",
-  //     element: <GuestRoute><Layout /></GuestRoute>,
-  //     children: [{ index: true, element: <Home1 /> },
-  //       { path: "login", element: <LogIn /> }],
-  //   },
- 
-  //   {
-  //     path: "/",
-  //     element: <ProtectedRoute><Layout /></ProtectedRoute>,
-  //     children: [
-  //         {index: true, element: <Home1 /> },
-  //         {path:'userdashboard2',element:<UserDasboard2 />},
-  //         {path:'loading',element:<Loading />},
-  //         {path:'sidebar',element:<SideBar />},
-  //         {path:'forgetpassword',element:<ForgetPassword />},
-  //         {path:'formpage',element:<FormPage />},
-  //         {path:'formresponse',element:<FormResponse formname="formname"/>}
-  //     ],
-  //   },
-  //   // {
-  //   //   path: "/",
-  //   //   element: <ProtectedRoute><Layout /></ProtectedRoute>,
-  //   //   children: [{ index: true, element: <Home1 /> }],
-  //   // },
-  //   // {
-  //   //   path: "*",
-  //   //   element: <NotFound />,
-  //   // },
-  // ]);
-  
+        // Shared Route
+        {
+          path: "formresponse",
+          element: <ProtectedRoute><FormResponse formname="formname" /></ProtectedRoute>,
+        },
 
-  
+        // Optional: 404 fallback
+        {
+          path: "*",
+          element: <h2 className="text-center text-danger mt-5">404 - Page Not Found</h2>,
+        },
+      ],
+    },
+  ]);
 
-
-
-// const router=createBrowserRouter([
-//   {path:"/",element:<Layout />,children:[
-//     {index:true,element:<Home1 />},
-//     {path:'login',element:<LogIn />},
-//     {path:'userdashboard',element:<UserDasboard1 />},
-//     {path:'userdashboard2',element:<UserDasboard2 />},
-//     {path:'loading',element:<Loading />},
-//     {path:'sidebar',element:<SideBar />},
-//     {path:'forgetpassword',element:<ForgetPassword />},
-//     {path:'formresponse',element:<FormResponse formname="vhjvj"/>},
-//     // {path:'search',element:<Search/>},
-    
-//   ]}
-// ])
   return (
-    <>
     <UserProvider>
-    <RouterProvider router={router}/>
-    <Toaster />
+      <RouterProvider router={router} />
+      <Toaster />
     </UserProvider>
-
- 
-    </>
-  )
+  );
 }
 
 export default App

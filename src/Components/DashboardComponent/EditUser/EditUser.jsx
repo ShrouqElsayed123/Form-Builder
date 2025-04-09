@@ -19,6 +19,8 @@ async function getUsers() {
     const { data } = await axios.get(`http://127.0.0.1:8000/api/user/showbyid/${id}`);
     let newUser = data[0]; 
     setUser(newUser);
+    console.log(user);
+    
   } catch (error) {
     console.error("Error fetching user", error);
   }
