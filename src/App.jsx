@@ -25,6 +25,8 @@ import UserTable from './Components/DashboardComponent/UserTable/UserTable'
 import AddUser from './Components/DashboardComponent/AddUser/AddUser'
 import EditUser from './Components/DashboardComponent/EditUser/EditUser'
 import NotFound from './Components/NotFound/NotFound'
+import FormBuilder from './Components/FormBuilder/FormBuilder'
+import FormBuilderProvider from './Components/FormBuilder/FormBuilderContext'
 // import DashboardLayout from './Components/DashboardComponent/DashboardLayout/DashboardLayout'
 // import AdminRoute from './Components/AdminRoute/AdminRoute'
 
@@ -41,6 +43,7 @@ function App() {
         { path: "login", element: <GuestRoute><LogIn /></GuestRoute> },
         { path: "forgetpassword", element: <ForgetPassword /> },
         { path: "loading", element: <Loading /> },
+        { path: "formb", element: <FormBuilder /> },
 
         // Protected Routes
         {
@@ -92,8 +95,10 @@ function App() {
 
   return (
     <UserProvider>
+      <FormBuilderProvider>
       <RouterProvider router={router} />
       <Toaster />
+      </FormBuilderProvider>
     </UserProvider>
   );
 }
