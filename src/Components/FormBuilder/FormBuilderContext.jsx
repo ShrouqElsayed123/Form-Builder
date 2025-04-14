@@ -1,5 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import { FormElements } from "./FormElements";
+import Popup from './Popup/Popup';  // استيراد مكون Popup
+import toast from "react-hot-toast";
 
 export const formBuilderContext = createContext(null);
 
@@ -16,6 +18,8 @@ export default function FormBuilderProvider({ children }) {
   });
 
   const [selectedElement, setSelectedElement] = useState(null);
+  const [showPopup, setShowPopup] = useState(false); // إضافة حالة لعرض النافذة المنبثقة
+  const [elementToDelete, setElementToDelete] = useState(null); // لتخزين العنصر الذي سيتم حذفه
 
   // ✅ كل مرة العناصر تتغير، احفظها في localStorage
   useEffect(() => {
@@ -24,6 +28,7 @@ export default function FormBuilderProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("formName", formName);
   }, [formName]);
+
   // إضافة عنصر جديد
   const addElement = (type) => {
     const element = FormElements[type];
@@ -34,14 +39,29 @@ export default function FormBuilderProvider({ children }) {
     setElements((prev) => [...prev, newInstance]);
   };
 
-  // حذف عنصر
-  const deleteElement = (id) => {
-    if (window.confirm("هل أنت متأكد من حذف هذا العنصر؟")) {
-      setElements((prev) => prev.filter((el) => el.id !== id));
-      if (selectedElement?.id === id) {
+  // عرض النافذة المنبثقة لتأكيد الحذف
+  const showDeletePopup = (id) => {
+    setElementToDelete(id);  // حفظ العنصر الذي سيتم حذفه
+    setShowPopup(true);  // عرض النافذة المنبثقة
+  };
+
+  // حذف العنصر
+  const deleteElement = () => {
+    if (elementToDelete) {
+      setElements((prev) => prev.filter((el) => el.id !== elementToDelete));
+      if (selectedElement?.id === elementToDelete) {
         setSelectedElement(null);
       }
+      toast.success("تم حذف العنصر بنجاح")
     }
+    setShowPopup(false);  // إخفاء النافذة المنبثقة بعد الحذف
+    setElementToDelete(null);  // مسح العنصر المحفوظ
+  };
+
+  // إلغاء الحذف
+  const cancelDelete = () => {
+    setShowPopup(false);  // إخفاء النافذة المنبثقة دون الحذف
+    setElementToDelete(null);  // مسح العنصر المحفوظ
   };
 
   // تغيير ترتيب العناصر
@@ -71,7 +91,7 @@ export default function FormBuilderProvider({ children }) {
   return (
     <formBuilderContext.Provider
       value={{
-        deleteElement,
+        deleteElement: showDeletePopup,  // تغيير دالة الحذف لتعرض النافذة المنبثقة
         moveElement,
         addElement,
         updateElementProperties,
@@ -84,6 +104,15 @@ export default function FormBuilderProvider({ children }) {
       }}
     >
       {children}
+
+      {/* عرض النافذة المنبثقة إذا كانت مفعلة */}
+      {showPopup && (
+        <Popup
+          message="هل أنت متأكد من حذف هذا العنصر؟"
+          onConfirm={deleteElement}
+          onCancel={cancelDelete}
+        />
+      )}
     </formBuilderContext.Provider>
   );
 }
