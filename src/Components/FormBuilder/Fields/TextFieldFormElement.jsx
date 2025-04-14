@@ -1,3 +1,4 @@
+import { TextFields } from "@mui/icons-material";
 
 export const TextFieldFormElement = {
   type: "TextField",
@@ -14,7 +15,7 @@ export const TextFieldFormElement = {
 
 //  اللي هضيفه في ال sidebar 
   designerBtnElement: {
-    icon: <span>🔤</span>,
+    icon: <TextFields />,
     label: "Text Field"
   },
 

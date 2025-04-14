@@ -1,3 +1,5 @@
+import { CheckBox } from "@mui/icons-material";
+
 export const CheckboxFieldFormElement = {
     type: "Checkbox",
   
@@ -12,7 +14,7 @@ export const CheckboxFieldFormElement = {
     }),
   
     designerBtnElement: {
-      icon: <span>☑️</span>,
+      icon: <CheckBox />,
       label: "Checkbox"
     },
   
