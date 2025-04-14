@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FormElements } from "./FormElements";
 import SideBar from "./SideBar";
 import { formBuilderContext } from "./FormBuilderContext";
+import { Edit } from "@mui/icons-material";
 // import { FormElements } from "";
 // import graphPaper from '../../assets/imgs/paper.svg';
 
 const FormBuilder = () => {
-   let{elements,deleteElement,moveElement,setSelectedElement}=  useContext(formBuilderContext)
- 
+   let{elements,deleteElement,moveElement,setSelectedElement,formName, setFormName}=  useContext(formBuilderContext)
+   const [editingName, setEditingName] = useState(false);
+
   return (
     <div  className="d-flex h-100"
     style={{
@@ -25,6 +27,31 @@ const FormBuilder = () => {
         {/* المعاينة الحية للفورم */}
         <div className="border p-3 bg-white rounded shadow" style={{marginBottom:"100px"}}>
           <h3 className="fw-bold mb-4">Form Preview</h3>
+
+          {/* //لعنوان الفورم */}
+          <div className="d-flex align-items-center mb-3">
+  {editingName ? (
+    <input
+      className="form-control form-control-sm me-2"
+      style={{ maxWidth: "300px" }}
+      value={formName}
+      onChange={(e) => setFormName(e.target.value)}
+      onBlur={() => setEditingName(false)}
+      autoFocus
+    />
+  ) : (
+    <>
+      <h3 className="me-2 mb-0 ">{formName}</h3>
+      <button
+        className="btn btn-sm "
+        onClick={() => setEditingName(true)}
+      >
+        <Edit size={16} />
+      </button>
+    </>
+  )}
+</div>
+
           {elements.map((el, index) => {
             const Component = FormElements[el.type].formComponent;
             return (

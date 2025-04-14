@@ -11,50 +11,67 @@ export default function SideBar() {
   } = useContext(formBuilderContext);
 
   return (
-    <div
-      className="col-3 bg-light p-3 border-end overflow-auto"
-      style={{ minHeight: "100vh" }}
+    <div 
+      className="col-3 bg-light p-3 border-end "
+      style={{
+        height: "100vh", // خليه ياخد كامل ارتفاع الصفحة
+        overflowY: "auto", // يضيف التمرير
+        position: "sticky", // يثبته لو حبيت
+        top: 0
+      }}
+
     >
-      <h3 className="fw-bold mb-4">Available Elements</h3>
-
       {!selectedElement ? (
-        Object.keys(FormElements).map((key) => {
-          const { designerBtnElement } = FormElements[key];
-          return (
-            <button
-              key={key}
-              onClick={() => addElement(key)}
-              className="d-flex align-items-center gap-2 p-2 mb-2 bg-secondary rounded hover:bg-light w-100"
-            >
-              {designerBtnElement.icon} {designerBtnElement.label}
-            </button>
-          );
-        })
-      ) : (
-        <div className="w-100">
-          <h3 className="fw-bold mb-4">Editing Properties</h3>
-          {(() => {
-            const elementDef = FormElements[selectedElement?.type];
-            if (!elementDef) {
-              return (
-                <div className="alert alert-danger">
-                  ⚠️ لا يمكن عرض خصائص هذا العنصر (type غير معروف).
-                </div>
-              );
-            }
-
-            const PropertiesComponent = elementDef.propertiesComponent;
-
+        <>
+          <h3 className="fw-bold mb-4">Available Elements</h3>
+          {Object.keys(FormElements).map((key) => {
+            const { designerBtnElement } = FormElements[key];
             return (
-              <PropertiesComponent
-                element={selectedElement}
-                updateElement={updateElementProperties}
-              />
+              <button
+                key={key}
+                onClick={() => addElement(key)}
+                className="d-flex align-items-center gap-2 p-2 mb-2 bg-secondary rounded hover:bg-light w-100"
+              >
+                {designerBtnElement.icon} {designerBtnElement.label}
+              </button>
             );
-          })()}
+          })}
+        </>
+      ) : (
+        <div className="w-100 d-flex flex-column" style={{  }}>
+          <h3 className="fw-bold mb-4">Editing Properties</h3>
+
+          <div>
+            {(() => {
+              const elementDef = FormElements[selectedElement?.type];
+              if (!elementDef) {
+                return (
+                  <div className="alert alert-danger">
+                    ⚠️ لا يمكن عرض خصائص هذا العنصر (type غير معروف).
+                  </div>
+                );
+              }
+
+              const PropertiesComponent = elementDef.propertiesComponent;
+
+              return (
+                <PropertiesComponent
+                  element={selectedElement}
+                  updateElement={updateElementProperties}
+                />
+              );
+            })()}
+          </div>
+
           <button
             onClick={closeProperties}
             className="mt-4 w-100 btn btn-secondary"
+            style={{
+              position: "sticky",
+              bottom: 0,
+              zIndex: 1,
+              background: "#6c757d",
+            }}
           >
             Close Properties
           </button>

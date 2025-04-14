@@ -1,13 +1,29 @@
-import { useState, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
 import { FormElements } from "./FormElements";
 
 export const formBuilderContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
 export default function FormBuilderProvider({ children }) {
-  const [elements, setElements] = useState([]);
+  // ✅ استرجاع العناصر من localStorage إذا كانت موجودة
+  const [elements, setElements] = useState(() => {
+    const saved = localStorage.getItem("formElements");
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [formName, setFormName] = useState(() => {
+    const saved = localStorage.getItem("formName");
+    return saved || "نموذج بدون اسم";
+  });
+
   const [selectedElement, setSelectedElement] = useState(null);
 
+  // ✅ كل مرة العناصر تتغير، احفظها في localStorage
+  useEffect(() => {
+    localStorage.setItem("formElements", JSON.stringify(elements));
+  }, [elements]);
+  useEffect(() => {
+    localStorage.setItem("formName", formName);
+  }, [formName]);
   // إضافة عنصر جديد
   const addElement = (type) => {
     const element = FormElements[type];
@@ -61,8 +77,10 @@ export default function FormBuilderProvider({ children }) {
         updateElementProperties,
         closeProperties,
         setSelectedElement,
-        selectedElement, // ✅ ضيف دي
+        selectedElement,
         elements,
+        setFormName,
+        formName
       }}
     >
       {children}
