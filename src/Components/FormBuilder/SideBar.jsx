@@ -13,12 +13,7 @@ export default function SideBar() {
   return (
     <div 
       className="col-3 bg-light p-3 border-end "
-      style={{
-        height: "100vh", // خليه ياخد كامل ارتفاع الصفحة
-        overflowY: "auto", // يضيف التمرير
-        position: "sticky", // يثبته لو حبيت
-        top: 0
-      }}
+
 
     >
       {!selectedElement ? (

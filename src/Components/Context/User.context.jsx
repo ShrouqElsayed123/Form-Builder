@@ -9,7 +9,7 @@ export const userContext=createContext(null);
 export default function UserProvider({children}){
      
     let [token,setToken]=useState(localStorage.getItem("token"));
-    let role="user";
+    let role="adminu";
     function logout(){
        setToken(null);
         localStorage.removeItem("token");
