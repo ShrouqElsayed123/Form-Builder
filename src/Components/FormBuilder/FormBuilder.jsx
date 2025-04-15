@@ -4,6 +4,7 @@ import { formBuilderContext } from "./FormBuilderContext";
 import { Edit } from "@mui/icons-material";
 import SideBar from "./SideBar";
 
+
 const FormBuilder = () => {
    let { elements, deleteElement, moveElement, setSelectedElement, formName, setFormName,
      } = useContext(formBuilderContext);
@@ -51,47 +52,59 @@ const FormBuilder = () => {
           </div>
 
           {elements.map((el, index) => {
-            const Component = FormElements[el.type].formComponent;
-            return (
-              <div
-                key={el.id}
-                className="relative border-dashed border p-3 mb-4 cursor-pointer"
-                onClick={() => setSelectedElement(el)} // تحديد العنصر عند النقر
-              >
-                <Component {...el} />
+  const Component = FormElements[el.type]?.formComponent;
 
-                <div className="">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      deleteElement(el.id);
-                    }}
-                    className="text-danger"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveElement(index, -1);
-                    }}
-                    className="text-primary"
-                  >
-                    Up
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveElement(index, 1);
-                    }}
-                    className="text-primary"
-                  >
-                    Down
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+  if (!Component) {
+    console.warn(`Component not found for type: ${el.type}`);
+    return (
+      <div key={el.id} className="alert alert-warning">
+        ⚠️ Unknown element type: <strong>{el.type}</strong>
+      </div>
+    );
+  }
+
+
+  return (
+    <div
+      key={el.id}
+      className="relative border-dashed border p-3 mb-4 cursor-pointer"
+      onClick={() => setSelectedElement(el)} // تحديد العنصر عند النقر
+    >
+      <Component {...el} />
+
+      <div className="">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            deleteElement(el.id);
+          }}
+          className="text-danger"
+        >
+          Delete
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            moveElement(index, -1);
+          }}
+          className="text-primary"
+        >
+          Up
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            moveElement(index, 1);
+          }}
+          className="text-primary"
+        >
+          Down
+        </button>
+      </div>
+    </div>
+  );
+})}
+
         </div>
       </div>
     </div>

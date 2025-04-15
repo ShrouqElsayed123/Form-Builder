@@ -7,13 +7,13 @@ export const formBuilderContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
 export default function FormBuilderProvider({ children }) {
-  // ✅ استرجاع العناصر من localStorage إذا كانت موجودة
+  // ✅ استرجاع العناصر من sessionStorage إذا كانت موجودة
   const [elements, setElements] = useState(() => {
-    const saved = localStorage.getItem("formElements");
+    const saved = sessionStorage.getItem("formElements");
     return saved ? JSON.parse(saved) : [];
   });
   const [formName, setFormName] = useState(() => {
-    const saved = localStorage.getItem("formName");
+    const saved = sessionStorage.getItem("formName");
     return saved || "نموذج بدون اسم";
   });
 
@@ -21,12 +21,12 @@ export default function FormBuilderProvider({ children }) {
   const [showPopup, setShowPopup] = useState(false); // إضافة حالة لعرض النافذة المنبثقة
   const [elementToDelete, setElementToDelete] = useState(null); // لتخزين العنصر الذي سيتم حذفه
 
-  // ✅ كل مرة العناصر تتغير، احفظها في localStorage
+  // ✅ كل مرة العناصر تتغير، احفظها في sessionStorage
   useEffect(() => {
-    localStorage.setItem("formElements", JSON.stringify(elements));
+    sessionStorage.setItem("formElements", JSON.stringify(elements));
   }, [elements]);
   useEffect(() => {
-    localStorage.setItem("formName", formName);
+    sessionStorage.setItem("formName", formName);
   }, [formName]);
 
   // إضافة عنصر جديد
