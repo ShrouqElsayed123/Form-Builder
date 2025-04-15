@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from "react";
 import { FormElements } from "./FormElements";
 import Popup from './Popup/Popup';  // استيراد مكون Popup
 import toast from "react-hot-toast";
+import { arrayMove } from "@dnd-kit/sortable";
 
 export const formBuilderContext = createContext(null);
 
@@ -88,6 +89,16 @@ export default function FormBuilderProvider({ children }) {
     setSelectedElement(null);
   };
 
+
+  const handleDragEnd = ({ active, over }) => {
+    if (active.id !== over?.id) {
+      const oldIndex = elements.findIndex((el) => el.id === active.id);
+      const newIndex = elements.findIndex((el) => el.id === over.id);
+      const newItems = arrayMove(elements, oldIndex, newIndex);
+      setElements(newItems);
+    }
+  };
+
   return (
     <formBuilderContext.Provider
       value={{
@@ -100,7 +111,8 @@ export default function FormBuilderProvider({ children }) {
         selectedElement,
         elements,
         setFormName,
-        formName
+        formName,
+        handleDragEnd
       }}
     >
       {children}
