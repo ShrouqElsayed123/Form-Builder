@@ -12,11 +12,16 @@
   }
   
   .popup {
+    padding: 50px;
+    padding-top: 0;
+    text-align: right;
+  }
+  .parent{
     background: white;
-    padding: 20px;
     border-radius: 10px;
+    border:  3px solid #e6f5da;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    
   }
   
   .popupactions {

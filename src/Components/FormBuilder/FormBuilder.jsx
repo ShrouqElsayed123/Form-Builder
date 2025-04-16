@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { FormElements } from "./FormElements";
 import { formBuilderContext } from "./FormBuilderContext";
-import { DragIndicator, Edit } from "@mui/icons-material";
+import { DeleteOutline, DragIndicator, Edit } from "@mui/icons-material";
 import SideBar from "./SideBar";
 
 // dnd-kit
@@ -69,18 +69,21 @@ const SortableElement = ({ el, setSelectedElement, deleteElement }) => {
     <div className="flex-grow-1">
     <Component {...el} />
 
-<div className="mt-2">
+
+    </div>
+    <div className="mt-2">
   <button
     onClick={(e) => {
       e.stopPropagation();
+      // eslint-disable-next-line react/prop-types
       deleteElement(el.id);
     }}
-    className="text-danger"
+    className="border-0 bg-transparent" 
+    
   >
-    Delete
+   < DeleteOutline sx={{color:"#D9B343"}} />
   </button>
 </div>
-    </div>
     </div>
   );
 };

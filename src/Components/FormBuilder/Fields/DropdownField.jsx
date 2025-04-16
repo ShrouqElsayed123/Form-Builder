@@ -23,20 +23,25 @@ export const DropdownFormElement = {
     label: "Dropdown"
   },
 
-  designerComponent: ({ extraAttributes }) => (
-    <div style={{ padding: "10px", border: "1px solid #ccc" }}>
-      <label style={{ display: "block", marginBottom: "5px" }}>
-        {extraAttributes?.label || "Select Option"}
-      </label>
-      <select disabled style={{ width: "100%", padding: "8px" }}>
-        {extraAttributes?.options?.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  ),
+  // ✅ تم تعديلها: بتاخد العنصر كامل بدل extraAttributes
+  designerComponent: ({ element }) => {
+    const { extraAttributes } = element;
+
+    return (
+      <div style={{ padding: "10px", border: "1px solid #ccc" }}>
+        <label style={{ display: "block", marginBottom: "5px" }}>
+          {extraAttributes?.label || "Select Option"}
+        </label>
+        <select disabled style={{ width: "100%", padding: "8px" }}>
+          {extraAttributes?.options?.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  },
 
   formComponent: ({ extraAttributes, updateElement }) => {
     const handleChange = (e) => {
@@ -79,13 +84,11 @@ export const DropdownFormElement = {
       });
     };
 
-    // تعديل أو إضافة خيار
     const handleOptionChange = (index, e) => {
       const { name, value } = e.target;
       const updatedOptions = [...element.extraAttributes.options];
       updatedOptions[index] = { ...updatedOptions[index], [name]: value };
 
-      // تحديث العنصر بعد تعديل الخيار
       updateElement({
         ...element,
         extraAttributes: {
@@ -95,7 +98,6 @@ export const DropdownFormElement = {
       });
     };
 
-    // إضافة خيار جديد
     const addOption = () => {
       const updatedOptions = [
         ...element.extraAttributes.options,
@@ -111,7 +113,6 @@ export const DropdownFormElement = {
       });
     };
 
-    // حذف خيار
     const deleteOption = (index) => {
       const updatedOptions = element.extraAttributes.options.filter((_, i) => i !== index);
       updateElement({
@@ -152,11 +153,18 @@ export const DropdownFormElement = {
                 type="text"
                 name="value"
                 value={option.value}
-                placeholder="Option value"
+                placeholder="Value"
                 onChange={(e) => handleOptionChange(index, e)}
                 style={{ flex: 1, marginRight: "5px" }}
               />
-              <span style={{ flex: 1, marginRight: "5px" }}>Option {index + 1}</span>
+              <input
+                type="text"
+                name="label"
+                value={option.label}
+                placeholder="Label"
+                onChange={(e) => handleOptionChange(index, e)}
+                style={{ flex: 1, marginRight: "5px" }}
+              />
               <button
                 onClick={() => deleteOption(index)}
                 style={{
